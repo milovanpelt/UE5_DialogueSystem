@@ -4,6 +4,8 @@
 #include "SMainMenuWidget.h"
 #include "SlateOptMacros.h"
 
+#include "MenuHUD.h"
+
 #define LOCTEXT_NAMESPACE "MainMenu"
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
@@ -80,7 +82,10 @@ bool SMainMenuWidget::SupportsKeyboardFocus() const
 
 FReply SMainMenuWidget::OnPlayClicked() const
 {
-	UE_LOG(LogTemp, Warning, TEXT("Playing"));
+	if (OwningHUD.IsValid())
+	{
+		OwningHUD->RemoveMenu();
+	}
 
 	return FReply::Handled();
 }

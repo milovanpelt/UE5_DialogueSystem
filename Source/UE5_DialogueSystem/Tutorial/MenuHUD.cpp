@@ -3,16 +3,41 @@
 
 #include "MenuHUD.h"
 
-#include "../Engine/Classes/Engine/Engine.h"
-#include "../Slate/Public/Widgets/SWeakWidget.h"
+#include "Engine/Engine.h"
+#include "Widgets/SWeakWidget.h"
+
+void AMenuHUD::ShowMenu()
+{
+	if (GEngine && GEngine->GameViewport) {
+		MenuWidget = SNew(SMainMenuWidget);
+		MenuWidget->OwningHUD = this;
+		GEngine->GameViewport->AddViewportWidgetContent(MenuWidget.ToSharedRef());
+
+		if (PlayerOwner)
+		{
+			PlayerOwner->bShowMouseCursor = true;
+			PlayerOwner->SetInputMode(FInputModeUIOnly());
+		}
+	}
+}
+
+void AMenuHUD::RemoveMenu()
+{
+	if (GEngine && GEngine->GameViewport && MenuWidget.IsValid())
+	{
+		GEngine->GameViewport->RemoveViewportWidgetContent(MenuWidget.ToSharedRef());
+
+		if (PlayerOwner)
+		{
+			PlayerOwner->bShowMouseCursor = false;
+			PlayerOwner->SetInputMode(FInputModeGameOnly());
+		}
+	}
+}
 
 void AMenuHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (GEngine && GEngine->GameViewport) {
-		MenuWidget = SNew(SMainMenuWidget);
-		MenuWidget->OwningHUD = this;
-		GEngine->GameViewport->AddViewportWidgetContent(MenuWidget.ToSharedRef());
-	}
+	ShowMenu();
 }

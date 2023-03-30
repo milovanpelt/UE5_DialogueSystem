@@ -13,5 +13,12 @@ UCLASS()
 class UE5_DIALOGUESYSTEM_API AMenuPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+protected:
+	AMenuPlayerController();
+
+	virtual void SetupInputComponent() override;
+
+	void OpenMenu();
 	
 };
