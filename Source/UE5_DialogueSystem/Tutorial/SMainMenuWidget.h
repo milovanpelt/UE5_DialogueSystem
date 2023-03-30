@@ -24,6 +24,8 @@ public:
 	void Construct(const FArguments& InArgs);
 
 	virtual bool SupportsKeyboardFocus() const override;
+
+	FReply OnPlayClicked() const;
 public:
-	TWeakObjectPtr<class AMenuHUD> OwningHUb;
+	TWeakObjectPtr<class AMenuHUD> OwningHUD;
 };

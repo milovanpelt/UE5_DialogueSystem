@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "../Tutorial/SMainMenuWidget.h"
 #include "MenuHUD.generated.h"
+
+
 
 /**
  * 
@@ -14,4 +17,10 @@ class UE5_DIALOGUESYSTEM_API AMenuHUD : public AHUD
 {
 	GENERATED_BODY()
 	
+protected:
+	TSharedPtr<class SMainMenuWidget> MenuWidget;
+	TSharedPtr<class SWidget> MenuWidgetContainer;
+
+protected:
+	virtual void BeginPlay() override;
 };
