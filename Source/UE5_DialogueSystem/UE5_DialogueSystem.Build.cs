@@ -9,5 +9,7 @@ public class UE5_DialogueSystem : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput" });
-	}
+
+        PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore"});
+    }
 }
