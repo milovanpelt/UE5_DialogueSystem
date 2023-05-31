@@ -14,6 +14,6 @@ AUE5_DialogueSystemGameMode::AUE5_DialogueSystemGameMode()
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(TEXT("/Game/FirstPerson/Blueprints/BP_FirstPersonCharacter"));
 	DefaultPawnClass = PlayerPawnClassFinder.Class;
 
-	PlayerControllerClass = AMenuPlayerController::StaticClass();
-	HUDClass = AMenuHUD::StaticClass();
+	//PlayerControllerClass = AMenuPlayerController::StaticClass();
+	//HUDClass = AMenuHUD::StaticClass();
 }

@@ -11,5 +11,6 @@ public class UE5_DialogueSystemEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_1;
 		ExtraModuleNames.Add("UE5_DialogueSystem");
-	}
+        ExtraModuleNames.Add("DialogueEditorModule");
+    }
 }

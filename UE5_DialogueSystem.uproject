@@ -13,6 +13,16 @@
 				"Slate",
 				"SlateCore"
 			]
+		},
+		{
+			"Name": "DialogueEditorModule",
+			"Type": "Editor",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"Slate",
+				"SlateCore"
+			]
 		}
 	],
 	"Plugins": [
