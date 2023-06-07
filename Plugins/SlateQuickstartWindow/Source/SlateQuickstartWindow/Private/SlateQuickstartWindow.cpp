@@ -7,6 +7,7 @@
 #include "Widgets/Docking/SDockTab.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Text/STextBlock.h"
+#include "Widgets/SQuickStartWindowMenu.h"
 #include "ToolMenus.h"
 
 static const FName SlateQuickstartWindowTabName("SlateQuickstartWindow");
@@ -63,14 +64,7 @@ TSharedRef<SDockTab> FSlateQuickstartWindowModule::OnSpawnPluginTab(const FSpawn
 	return SNew(SDockTab)
 		.TabRole(ETabRole::NomadTab)
 		[
-			// Put your tab content here!
-			SNew(SBox)
-			.HAlign(HAlign_Center)
-			.VAlign(VAlign_Center)
-			[
-				SNew(STextBlock)
-				.Text(WidgetText)
-			]
+			SNew(SQuickStartWindowMenu)
 		];
 }
 

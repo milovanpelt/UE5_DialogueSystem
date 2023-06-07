@@ -17,4 +17,11 @@ public:
 
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
+
+	FReply OnTestButtonClicked();
+	void OnTestCheckBoxStateChanged(ECheckBoxState NewState);
+	ECheckBoxState IsTestBoxChecked() const;
+
+protected:
+	bool bIsTestBoxChecked;
 };
