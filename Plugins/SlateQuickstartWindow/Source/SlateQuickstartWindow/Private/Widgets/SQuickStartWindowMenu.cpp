@@ -71,34 +71,7 @@ void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
 				.MinDesiredWidth(200)
 			]
 		]
-
-		// Saving Dialogue Button
-		+ SVerticalBox::Slot()
-		.AutoHeight()
-		[
-			SNew(SHorizontalBox)
-			+ SHorizontalBox::Slot()
-			.FillWidth(100)
-			.Padding(0, 0, 0, 0)
-			.VAlign(VAlign_Top)
-			[
-				SNew(SButton)
-				.Text(FText::FromString("Save Dialogue(s)"))
-				.OnClicked(FOnClicked::CreateSP(this, &SQuickStartWindowMenu::OnTestButtonClicked))
-			]
-		]
 	]; // end of slots
-}
-
-FReply SQuickStartWindowMenu::OnTestButtonClicked()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Hello, world! The checkbox is %s."), (bIsTextBoxChecked ? TEXT("checked") : TEXT("unchecked")));
-	return FReply::Handled();
-}
-
-void SQuickStartWindowMenu::OnTextCheckBoxStateChanged(ECheckBoxState NewState)
-{
-	bIsTextBoxChecked = NewState == ECheckBoxState::Checked ? true : false;
 }
 
 void SQuickStartWindowMenu::OnTextChanged(const FText& NewText, ETextCommit::Type CommitType, int32 DialogueIndex)
@@ -113,11 +86,6 @@ void SQuickStartWindowMenu::OnTextChanged(const FText& NewText, ETextCommit::Typ
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("Dialogue %d saved: %s"), DialogueIndex + 1, *Dialogues[DialogueIndex]);
-}
-
-ECheckBoxState SQuickStartWindowMenu::IsTestBoxChecked() const
-{
-	return bIsTextBoxChecked ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
 }
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

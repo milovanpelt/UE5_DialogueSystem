@@ -18,12 +18,7 @@ public:
 	/** Constructs this widget with InArgs */
 	void Construct(const FArguments& InArgs);
 
-	FReply OnTestButtonClicked();
-	void OnTextCheckBoxStateChanged(ECheckBoxState NewState);
 	void OnTextChanged(const FText& NewText, ETextCommit::Type CommitType, int32 DialogueIndex);
-	ECheckBoxState IsTestBoxChecked() const;
-
 protected:
-	bool bIsTextBoxChecked;
 	TArray<FString> Dialogues;
 };
