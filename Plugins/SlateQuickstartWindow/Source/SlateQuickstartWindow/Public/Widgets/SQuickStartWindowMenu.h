@@ -19,9 +19,10 @@ public:
 	void Construct(const FArguments& InArgs);
 
 	FReply OnTestButtonClicked();
-	void OnTestCheckBoxStateChanged(ECheckBoxState NewState);
+	void OnTextCheckBoxStateChanged(ECheckBoxState NewState);
+	void OnTextChanged(const FText& NewText, ETextCommit::Type CommitType);
 	ECheckBoxState IsTestBoxChecked() const;
 
 protected:
-	bool bIsTestBoxChecked;
+	bool bIsTextBoxChecked;
 };

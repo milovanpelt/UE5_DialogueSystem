@@ -42,28 +42,41 @@ void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
 			.VAlign(VAlign_Top)
 			[
 				SNew(SCheckBox)
-				.OnCheckStateChanged(FOnCheckStateChanged::CreateSP(this, &SQuickStartWindowMenu::OnTestCheckBoxStateChanged))
-				.IsChecked(bIsTestBoxChecked)
+				.OnCheckStateChanged(FOnCheckStateChanged::CreateSP(this, &SQuickStartWindowMenu::OnTextCheckBoxStateChanged))
+				.IsChecked(bIsTextBoxChecked)
 			]
+		]
+		+ SVerticalBox::Slot()
+		.AutoHeight()
+		[
+			SNew(SEditableTextBox)
+			.OnTextCommitted(this, &SQuickStartWindowMenu::OnTextChanged)
+			.Text(FText::FromString("Enter your text here"))
+			.MinDesiredWidth(200)
 		]
 	];
 }
 
 FReply SQuickStartWindowMenu::OnTestButtonClicked()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hello, world! The checkbox is %s."), (bIsTestBoxChecked ? TEXT("checked") : TEXT("unchecked")));
+	UE_LOG(LogTemp, Warning, TEXT("Hello, world! The checkbox is %s."), (bIsTextBoxChecked ? TEXT("checked") : TEXT("unchecked")));
 	return FReply::Handled();
 }
 
-void SQuickStartWindowMenu::OnTestCheckBoxStateChanged(ECheckBoxState NewState)
+void SQuickStartWindowMenu::OnTextCheckBoxStateChanged(ECheckBoxState NewState)
 {
-	bIsTestBoxChecked = NewState == ECheckBoxState::Checked ? true : false;
+	bIsTextBoxChecked = NewState == ECheckBoxState::Checked ? true : false;
+}
+
+void SQuickStartWindowMenu::OnTextChanged(const FText& NewText, ETextCommit::Type CommitType)
+{
+	FString InputString = NewText.ToString();
+	UE_LOG(LogTemp, Warning, TEXT("%s"), *InputString);
 }
 
 ECheckBoxState SQuickStartWindowMenu::IsTestBoxChecked() const
 {
-	return bIsTestBoxChecked ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
+	return bIsTextBoxChecked ? ECheckBoxState::Checked : ECheckBoxState::Unchecked;
 }
-
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
