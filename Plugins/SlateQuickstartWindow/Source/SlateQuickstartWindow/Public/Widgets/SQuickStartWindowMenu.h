@@ -19,6 +19,4 @@ public:
 	void Construct(const FArguments& InArgs);
 
 	void OnTextChanged(const FText& NewText, ETextCommit::Type CommitType, int32 DialogueIndex);
-protected:
-	TArray<FString> Dialogues;
 };

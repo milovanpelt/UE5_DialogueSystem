@@ -3,6 +3,7 @@
 
 #include "Widgets/SQuickStartWindowMenu.h"
 #include "SlateOptMacros.h"
+#include <SlateQuickstartWindow/Public/Widgets/DialogueManager.h>
 
 BEGIN_SLATE_FUNCTION_BUILD_OPTIMIZATION
 void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
@@ -78,16 +79,7 @@ void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
 
 void SQuickStartWindowMenu::OnTextChanged(const FText& NewText, ETextCommit::Type CommitType, int32 DialogueIndex)
 {
-	if (Dialogues.IsValidIndex(DialogueIndex))
-	{
-		Dialogues[DialogueIndex] = NewText.ToString();
-	}
-	else
-	{
-		Dialogues.Add(NewText.ToString());
-	}
-
-	UE_LOG(LogTemp, Warning, TEXT("Dialogue %d saved: %s"), DialogueIndex + 1, *Dialogues[DialogueIndex]);
+	DialogueManager::GetInstance().SetDialogue(DialogueIndex, NewText);
 }
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
