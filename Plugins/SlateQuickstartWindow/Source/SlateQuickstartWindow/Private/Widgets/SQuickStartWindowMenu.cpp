@@ -14,17 +14,17 @@ void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
 		+ SVerticalBox::Slot()
 		.AutoHeight()
 		[
-			SNew(SHorizontalBox)
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
+			SNew(SVerticalBox)
+			+ SVerticalBox::Slot()
+			.AutoHeight()
 			.VAlign(VAlign_Top)
 			[
 				SNew(STextBlock)
 				.Text(FText::FromString("Dialogue 1: "))
 			]
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
-			.Padding(10, 0, 0, 0)
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 0, 0, 0)
 			.VAlign(VAlign_Top)
 			[
 				SNew(SEditableTextBox)
@@ -34,16 +34,17 @@ void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
 			]
 
 			// Dialogue box 2
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 10, 0, 0)
 			.VAlign(VAlign_Top)
 			[
 				SNew(STextBlock)
 				.Text(FText::FromString("Dialogue 2: "))
 			]
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
-			.Padding(10, 0, 0, 0)
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 0, 0, 0)
 			.VAlign(VAlign_Top)
 			[
 				SNew(SEditableTextBox)
@@ -53,16 +54,17 @@ void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
 			]
 
 			// Dialogue box 3
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 10, 0, 0)
 			.VAlign(VAlign_Top)
 			[
 				SNew(STextBlock)
 				.Text(FText::FromString("Dialogue 3: "))
 			]
-			+ SHorizontalBox::Slot()
-			.AutoWidth()
-			.Padding(10, 0, 0, 0)
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(0, 0, 0, 0)
 			.VAlign(VAlign_Top)
 			[
 				SNew(SEditableTextBox)

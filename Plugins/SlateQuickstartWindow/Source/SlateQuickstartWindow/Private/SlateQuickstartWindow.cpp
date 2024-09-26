@@ -33,7 +33,7 @@ void FSlateQuickstartWindowModule::StartupModule()
 	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FSlateQuickstartWindowModule::RegisterMenus));
 	
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(SlateQuickstartWindowTabName, FOnSpawnTab::CreateRaw(this, &FSlateQuickstartWindowModule::OnSpawnPluginTab))
-		.SetDisplayName(LOCTEXT("FSlateQuickstartWindowTabTitle", "SlateQuickstartWindow"))
+		.SetDisplayName(LOCTEXT("FSlateQuickstartWindowTabTitle", "Dialogue Window"))
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
 }
 
