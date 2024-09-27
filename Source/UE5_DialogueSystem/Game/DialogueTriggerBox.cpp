@@ -2,6 +2,7 @@
 
 
 #include "DialogueTriggerBox.h"
+#include "../../../Plugins/SlateQuickstartWindow/Source/SlateQuickstartWindow/Public/Widgets/DialogueManager.h"
 
 
 ADialogueTriggerBox::ADialogueTriggerBox()
@@ -18,6 +19,10 @@ void ADialogueTriggerBox::Event(AActor* overlappedActor, AActor* otherActor)
 {
 	if (otherActor && otherActor != this)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Dialogue Box"));
+		for (int i = 0; i < DialogueManager::GetInstance().GetAllDialogues().Num(); i++)
+		{
+			FString Dialogue = DialogueManager::GetInstance().GetDialogue(i);
+			UE_LOG(LogTemp, Warning, TEXT("%s"), *Dialogue);
+		}
 	}
 }
