@@ -5,16 +5,48 @@
 
 void DialogueManager::SetDialogue(int32 DialogueIndex, const FText& NewText)
 {
-	if (Dialogues.IsValidIndex(DialogueIndex))
+	bool DoesDialogueExist = Dialogues.IsValidIndex(DialogueIndex);
+	const FString Dialogue = NewText.ToString();
+
+	if (DoesDialogueExist)
 	{
-		Dialogues[DialogueIndex] = NewText.ToString();
+		Dialogues[DialogueIndex] = Dialogue;
 	}
 	else
 	{
-		Dialogues.Add(NewText.ToString());
+		Dialogues.Add(Dialogue);
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("Dialogue %d saved: %s"), DialogueIndex, *Dialogues[DialogueIndex]);
+	UE_LOG(LogTemp, Warning, TEXT("Dialogue %d saved: %s"), DialogueIndex + 1, *Dialogues[DialogueIndex]);
+}
+
+void DialogueManager::SetNamedDialogue(const FString& CharacterName, const int DialogueIndex, const FText& NewText)
+{
+	bool DoesCharacterNameExist = NamedDialogues.Contains(CharacterName);
+	const FString Dialogue = NewText.ToString();
+
+	if (DoesCharacterNameExist)
+	{
+		NamedDialogues[CharacterName][DialogueIndex] = Dialogue;
+	}
+	else
+	{
+		NamedDialogues[CharacterName].Add(Dialogue);
+	}
+}
+
+const TArray<FString>& DialogueManager::GetAllNamedDialogues(const FString& CharacterName) const
+{
+	bool IsValidCharacterName = NamedDialogues.Contains(CharacterName);
+	if (IsValidCharacterName)
+	{
+		return NamedDialogues[CharacterName];
+	}
+	else
+	{
+		static const TArray<FString> EmptyArray;
+		return EmptyArray;
+	}
 }
 
 FString& DialogueManager::GetDialogue(int32 DialogueIndex)
