@@ -19,10 +19,18 @@ void ADialogueTriggerBox::Event(AActor* overlappedActor, AActor* otherActor)
 {
 	if (otherActor && otherActor != this)
 	{
-		for (int i = 0; i < DialogueManager::GetInstance().GetAllDialogues().Num(); i++)
+		/*for (int i = 0; i < DialogueManager::GetInstance().GetAllDialogues().Num(); i++)
 		{
 			FString Dialogue = DialogueManager::GetInstance().GetDialogue(i);
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *Dialogue);
+		}*/
+
+		const TArray<FString>& Dialogues = DialogueManager::GetInstance().GetAllNamedDialogues("CharacterA");
+
+		// Iterate over the array of dialogue strings and print each one
+		for (const FString& Dialogue : Dialogues)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dialogue: %s"), *Dialogue);
 		}
 	}
 }

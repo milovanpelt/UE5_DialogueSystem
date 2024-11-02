@@ -15,16 +15,16 @@ void SQuickStartWindowMenu::Construct(const FArguments& InArgs)
 		.AutoWidth()
 		.Padding(0, 20, 20, 0)
 		[
-			NewCharacterDialogueSection(TEXT("CharacterA"))
+			NewCharacterDialogueSection()
 		]
 
 		+ SHorizontalBox::Slot()
 		.AutoWidth()
 		.Padding(0, 20, 20, 0)
 		[
-			NewCharacterDialogueSection(TEXT("CharacterB"))
+			NewCharacterDialogueSection()
 		]
-	]; // end of slots
+	];
 }
 
 void SQuickStartWindowMenu::OnTextChanged(const FText& NewText, ETextCommit::Type CommitType, int32 DialogueIndex)
@@ -33,8 +33,16 @@ void SQuickStartWindowMenu::OnTextChanged(const FText& NewText, ETextCommit::Typ
 
 }
 
-TSharedRef<SVerticalBox> SQuickStartWindowMenu::NewCharacterDialogueSection(const FString& CharacterName)
+void SQuickStartWindowMenu::OnCharacterDialogueChanged(const FText& NewText, ETextCommit::Type CommitType, const TCHAR* CharacterName, int32 DialogueIndex)
 {
+	FString NameAsString = FString(CharacterName);
+	DialogueManager::GetInstance().SetNamedDialogue(NameAsString, DialogueIndex, NewText);
+}
+
+TSharedRef<SVerticalBox> SQuickStartWindowMenu::NewCharacterDialogueSection()
+{
+	const FString& CharacterName = "";
+
 	// Dialogue Character Name
 	return SNew(SVerticalBox)
 	+ SVerticalBox::Slot()
@@ -42,7 +50,7 @@ TSharedRef<SVerticalBox> SQuickStartWindowMenu::NewCharacterDialogueSection(cons
 	.VAlign(VAlign_Top)
 	[
 		SNew(STextBlock)
-		.Text(FText::FromString("Character Name: " + CharacterName))
+		.Text(FText::FromString("Character Name: "))
 	]
 	+ SVerticalBox::Slot()
 	.AutoHeight()
@@ -50,7 +58,7 @@ TSharedRef<SVerticalBox> SQuickStartWindowMenu::NewCharacterDialogueSection(cons
 	.VAlign(VAlign_Top)
 	[
 		SNew(SEditableTextBox)
-		.OnTextCommitted(this, &SQuickStartWindowMenu::OnTextChanged, 0)
+		.OnTextCommitted(this, &SQuickStartWindowMenu::OnCharacterDialogueChanged, *CharacterName, 0)
 		.Text(FText::FromString("Enter character name here"))
 		.MinDesiredWidth(200)
 	]
@@ -70,7 +78,7 @@ TSharedRef<SVerticalBox> SQuickStartWindowMenu::NewCharacterDialogueSection(cons
 	.VAlign(VAlign_Top)
 	[
 		SNew(SEditableTextBox)
-		.OnTextCommitted(this, &SQuickStartWindowMenu::OnTextChanged, 1)
+		.OnTextCommitted(this, &SQuickStartWindowMenu::OnCharacterDialogueChanged, *CharacterName, 0)
 		.Text(FText::FromString("Enter your dialogue here"))
 		.MinDesiredWidth(200)
 	]
@@ -90,7 +98,7 @@ TSharedRef<SVerticalBox> SQuickStartWindowMenu::NewCharacterDialogueSection(cons
 	.VAlign(VAlign_Top)
 	[
 		SNew(SEditableTextBox)
-		.OnTextCommitted(this, &SQuickStartWindowMenu::OnTextChanged, 2)
+		.OnTextCommitted(this, &SQuickStartWindowMenu::OnCharacterDialogueChanged, *CharacterName, 1)
 		.Text(FText::FromString("Enter your dialogue here"))
 		.MinDesiredWidth(200)
 	]
@@ -110,14 +118,12 @@ TSharedRef<SVerticalBox> SQuickStartWindowMenu::NewCharacterDialogueSection(cons
 	.VAlign(VAlign_Top)
 	[
 		SNew(SEditableTextBox)
-		.OnTextCommitted(this, &SQuickStartWindowMenu::OnTextChanged, 2)
+		.OnTextCommitted(this, &SQuickStartWindowMenu::OnCharacterDialogueChanged, *CharacterName, 2)
 		.Text(FText::FromString("Enter your dialogue here"))
 		.MinDesiredWidth(200)
 	];
 }
 
-void SQuickStartWindowMenu::OnCharacterDialogueChanged(const FString& CharacterName, const FText& NewText, ETextCommit::Type CommitType)
-{
-}
+
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION

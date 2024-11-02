@@ -20,6 +20,6 @@ public:
 private:
 	void OnTextChanged(const FText& NewText, ETextCommit::Type CommitType, int32 DialogueIndex);
 
-	TSharedRef<SVerticalBox> NewCharacterDialogueSection(const FString& CharacterName);
-	void OnCharacterDialogueChanged(const FString& CharacterName, const FText& NewText, ETextCommit::Type CommitType);
+	TSharedRef<SVerticalBox> NewCharacterDialogueSection();
+	void OnCharacterDialogueChanged(const FText& NewText, ETextCommit::Type CommitType, const TCHAR* CharacterName, int32 DialogueIndex);
 };

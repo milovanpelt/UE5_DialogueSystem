@@ -27,12 +27,30 @@ void DialogueManager::SetNamedDialogue(const FString& CharacterName, const int D
 
 	if (DoesCharacterNameExist)
 	{
-		NamedDialogues[CharacterName][DialogueIndex] = Dialogue;
+		TArray<FString>& DialogueArray = NamedDialogues[CharacterName];
+		if (DialogueIndex < DialogueArray.Num())
+		{
+			DialogueArray[DialogueIndex] = Dialogue;
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Dialogue Index is out of bounds: %s"), DialogueIndex);
+		}
 	}
 	else
 	{
-		NamedDialogues[CharacterName].Add(Dialogue);
+		TArray<FString> NewDialogueArray;
+
+		for (int32 i = 0; i < DialogueIndex; i++)
+		{
+			NewDialogueArray.Add(FString());
+		}
+
+		NewDialogueArray.Add(Dialogue);
+		NamedDialogues.Add(CharacterName, NewDialogueArray);
 	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Dialogue %d saved for %s: %s"), DialogueIndex + 1, *CharacterName, *Dialogue);
 }
 
 const TArray<FString>& DialogueManager::GetAllNamedDialogues(const FString& CharacterName) const
